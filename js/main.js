@@ -1,4 +1,4 @@
-let SCENE, CAMERA, RENDERER, CUBE;
+let SCENE, CAMERA, RENDERER, CUBE, OBJECT;
 
 function init() {
     SCENE = new THREE.Scene();
@@ -13,15 +13,20 @@ function init() {
     RENDERER.setSize(window.innerWidth * .8, window.innerHeight * .8);
     document.querySelector('[data-render]').appendChild(RENDERER.domElement);
 
-    const GEOMETRY = new THREE.BoxGeometry(1, 1, 1);
-    const MATERIAL = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const color = 0xFFFFFF;
+    const intensity = 1;
+    const light = new THREE.DirectionalLight(color, intensity);
 
-    // const TEXTURE = new THREE.TextureLoader().load()
+    light.position.set(-1, 2, 4);
+    SCENE.add(light);
+
+    const GEOMETRY = new THREE.BoxGeometry(1, 1, 1);
+    const MATERIAL = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+
     CUBE = new THREE.Mesh(GEOMETRY, MATERIAL);
 
     SCENE.add(CUBE);
     CAMERA.position.z = 5;
-
 }
 function animate() {
     requestAnimationFrame(animate);
@@ -29,11 +34,12 @@ function animate() {
     CUBE.rotation.y += 0.02;
     RENDERER.render(SCENE, CAMERA);
 }
-function onWindowResize() {
+
+init();
+animate();
+
+window.addEventListener('resize', () => {
     CAMERA.aspect = window.innerWidth / window.innerHeight;
     CAMERA.updateProjectionMatrix();
     RENDERER.setSize(window.innerWidth * .8, window.innerHeight * .8);
-}
-init();
-window.addEventListener('resize', onWindowResize);
-animate();
+});
