@@ -1,11 +1,39 @@
 body{
     margin: 0;
+    background-color: #222;
 }
 canvas{
     width: 100%;
     height: 100%;
 }
-section{
+.parent {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 50px;
+    grid-row-gap: 23px;
+    }
+section, h2{
     width: 80%;
+    margin: 2rem auto;
+}
+header{
+    margin: 0;
+    padding: 2.5rem 1rem;
+    background-color: #111;
+}
+h1, ul, a{
+    color: #1abc9c;
+    width: 90%;
     margin: 0 auto;
+    text-transform: uppercase;
+}
+h1:hover, ul:hover, a:hover{
+    color:#16a085;
+}
+h2, p{
+    color: #eee;
+}
+h3{
+    margin: 0;
 }
